@@ -1,0 +1,95 @@
+﻿<sdk:Page
+    x:Class="BlazorApp.MyControl.CustomControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:local="clr-namespace:BlazorApp.MyControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:razor="clr-namespace:OpenSilver.Compatibility.Blazor;assembly=OpenSilver.Compatibility.Blazor"
+    mc:Ignorable="d">
+    <Canvas>
+        <StackPanel>
+
+            <Border Padding="20" Background="LightGreen" Margin="20,0,20,20" HorizontalAlignment="Left">
+                <StackPanel Height="500" Width="300">
+                    <razor:RazorComponent x:Name="Counter1" Margin="0,20,0,0" Height="200">
+
+<h3>Counter</h3>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+
+@code {
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+                    </razor:RazorComponent>
+
+                    <razor:RazorComponent x:Name="QuickGridDemo1" Margin="0,20,0,0" Height="150">
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+                        
+<h3>Quick Grid Component Test</h3>
+
+<QuickGrid Items="@People">
+    <PropertyColumn Property="@(p => p.PersonId)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.BirthDate)" Format="yyyy-MM-dd" Sortable="true" />
+</QuickGrid>
+
+@code {
+
+    public record Person(int PersonId, string Name, DateOnly BirthDate);
+
+    [Parameter]
+    public IQueryable<Person> People { get; set; }
+        
+    public void Refresh()
+    {
+        this.StateHasChanged();
+    }
+}
+                    </razor:RazorComponent>
+                        
+                    <razor:RazorComponent x:Name="RadzendDemo1" Margin="0,20,0,0" Height="150">
+
+@using Radzen
+@using Radzen.Blazor
+
+<RadzenDataGrid Data="@customers" TItem="Customer">
+    <Columns>
+        <RadzenDataGridColumn TItem="Customer" Property="CustomerID" Title="Customer ID"  />
+        <RadzenDataGridColumn TItem="Customer" Property="CompanyName" Title="Company Name" />
+        <RadzenDataGridColumn TItem="Customer" Property="ContactName" Title="Contact Name" />
+    </Columns>
+</RadzenDataGrid>
+@code {
+    public record Customer(int CustomerID, string CompanyName, string ContactName);
+                        
+    IEnumerable<Customer> customers;
+
+    protected override void OnInitialized()
+    {
+        customers = new[] {
+            new Customer(10942, "TEST", "AAA"),
+            new Customer(10944, "António Langa", "BBB"),
+            new Customer(11203, "Julie Smith", "DDD"),
+            new Customer(11205, "Nur Sari", "1234"),
+            new Customer(11898, "Jose Hernandez", "BBBB"),
+            new Customer(12130, "Kenji Sato", "LLLL"),
+        }.AsQueryable();
+    }
+}
+                    </razor:RazorComponent>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Canvas>
+    
+</sdk:Page>

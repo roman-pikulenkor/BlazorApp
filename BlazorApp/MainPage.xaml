@@ -1,0 +1,99 @@
+﻿<sdk:Page
+    x:Class="BlazorApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:local="clr-namespace:BlazorApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:razor="clr-namespace:OpenSilver.Compatibility.Blazor;assembly=OpenSilver.Compatibility.Blazor"
+    mc:Ignorable="d">
+    <Canvas>
+        <StackPanel>
+
+            <Border Padding="20" Background="LightGreen" Margin="20,0,20,20" HorizontalAlignment="Left">
+                <StackPanel Height="600">
+                    <TextBlock Text="Second demo: displaying and interacting with the QuickGrid Blazor component:"
+            FontSize="16"
+            FontWeight="Bold"/>
+                    <Button Click="Button_Click"
+            Content="Click me to load C# data into the Blazor QuickGrid component"
+            FontWeight="Bold"
+            FontSize="14"
+            HorizontalAlignment="Left"
+            Margin="0,20,0,0"/>
+
+                    <razor:RazorComponent x:Name="RadzenDemo1" Margin="0,20,0,0" Height="200">
+@using Radzen
+@using Radzen.Blazor
+@using OpenSilver.Samples.Showcase
+                        
+    <RadzenDataGrid Data="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}" TItem="Planet">
+    <Columns>
+        <RadzenDataGridColumn TItem="Planet" Property="Radius" Title="Radius"  />
+        <RadzenDataGridColumn TItem="Planet" Property="Name" Title="Name" />
+        <RadzenDataGridColumn TItem="Planet" Property="RotationPeriod" Title="RotationPeriod" />
+    </Columns>
+</RadzenDataGrid>
+
+                    </razor:RazorComponent>
+
+                    <razor:RazorComponent Margin="0,20,0,0" Height="300">
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using OpenSilver.Samples.Showcase
+     
+<h3>Quick Grid Component Test</h3>
+
+<QuickGrid Items="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
+    <PropertyColumn Property="@(p => p.Radius)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.RotationPeriod)" Sortable="true" />
+</QuickGrid>
+
+@code {
+
+    <!--public record Person(int PersonId, string Name, DateOnly BirthDate);-->
+
+    <!--[Parameter]-->
+    <!--public dynamic People; // does not work--> 
+    <!--public IQueryable<Person> People { get; set; }-->
+    <!--public IQueryable<ExpandoObject> People;-->
+        
+            
+    protected override void OnInitialized()
+    {
+        <!--People = new[] {
+            new Person(10895, "TEST", new DateOnly(1985, 3, 16)),
+            new Person(10944, "António Langa", new DateOnly(1991, 12, 1)),
+            new Person(11203, "Julie Smith", new DateOnly(1958, 10, 10)),
+            new Person(11205, "Nur Sari", new DateOnly(1922, 4, 27)),
+            new Person(11898, "Jose Hernandez", new DateOnly(2011, 5, 3)),
+            new Person(12130, "Kenji Sato", new DateOnly(2004, 1, 9)),
+        }.AsQueryable();-->
+                
+        <!--List<ExpandoObject> People1 = new List<ExpandoObject>();
+
+        dynamic person1 = new ExpandoObject();
+        person1.PersonId = 1;
+        person1.Name = "John Doe";
+        person1.BirthDate = new DateOnly(1990, 1, 1);
+
+        dynamic person2 = new ExpandoObject();
+        person2.PersonId = 2;
+        person2.Name = "Jane Doe";
+        person2.BirthDate = new DateOnly(1992, 2, 2);
+
+        People1.Add(person1);
+        People1.Add(person2);
+        People = People1.AsQueryable();-->
+    }
+}
+
+                    </razor:RazorComponent>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Canvas>
+    
+</sdk:Page>

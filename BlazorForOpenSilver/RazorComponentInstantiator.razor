@@ -1,0 +1,44 @@
+﻿@namespace OpenSilver.Compatibility.Blazor
+
+<DynamicComponent Type="@ComponentType" @ref="_dc" />
+
+@code {
+    private Type _componentType = typeof(RazorComponentIntantiatorDefaultContent);
+    private DynamicComponent? _dc;
+
+    [Parameter]
+    public int uniqueid { get; set; }
+
+    public Type ComponentType
+    {
+        get
+        {
+            return _componentType;
+        }
+        set
+        {
+            _componentType = value;
+            this.StateHasChanged();
+        }
+    }
+
+    public object? ComponentInstance
+    {
+        get
+        {
+            return _dc?.Instance;
+        }
+    }
+
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine($"unique id:{uniqueid}, {firstRender}");
+        #if XAMLFORBLAZOR
+        XamlForBlazor.
+        #endif
+        RazorComponent.RaiseOnRazorComponentInstantiatorRendered(this.uniqueid, this, firstRender);
+
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}
