@@ -14,6 +14,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="6.19.1" />
     <PackageReference Include="OpenSilver" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="0.1.0-alpha.22351.1" />
     <PackageReference Include="Radzen.Blazor" Version="4.30.2" />

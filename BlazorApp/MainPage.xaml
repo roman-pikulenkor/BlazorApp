@@ -20,7 +20,7 @@
             HorizontalAlignment="Left"
             Margin="0,20,0,0"/>
 
-                    <razor:RazorComponent x:Name="RadzenDemo1" Margin="0,20,0,0" Height="250">
+                    <razor:RazorComponent x:Name="RadzenDemo1" Margin="0,20,0,0" Height="200">
 @using Radzen
 @using Radzen.Blazor
 @using OpenSilver.Samples.Showcase
@@ -36,7 +36,7 @@
 
                     </razor:RazorComponent>
 
-                    <razor:RazorComponent Margin="0,20,0,0" Height="250">
+                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
 
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using OpenSilver.Samples.Showcase
@@ -59,12 +59,12 @@
 
                     </razor:RazorComponent>
                         
-                    <razor:RazorComponent Margin="0,20,0,0" Height="250">
+                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
 
 @using Syncfusion.Blazor.Grids
 @using OpenSilver.Samples.Showcase
      
-<h3>Syncfusion.Blazor.Grids Test</h3>
+<h3>MudBlazor.Grids Test</h3>
 
 <SfGrid DataSource="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
     <GridColumns>
@@ -77,6 +77,25 @@
     .e-hide {
         visibility: hidden;
     }
+</style>
+                    </razor:RazorComponent>
+                        
+                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
+
+@using MudBlazor
+@using OpenSilver.Samples.Showcase
+     
+<h3>MudBlazor Test</h3>
+
+<!--<MudDataGrid Items="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}" SortMode="@SortMode.None">-->
+<MudDataGrid Items="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}" SortMode="@SortMode.None">
+    <Columns>
+        <PropertyColumn Property="x => x.Radius" Title="Rd" />
+        <PropertyColumn Property="x => x.Name" />
+        <PropertyColumn Property="x => x.RotationPeriod" />
+    </Columns>
+</MudDataGrid>
+<style>
 </style>
                     </razor:RazorComponent>
                 </StackPanel>
