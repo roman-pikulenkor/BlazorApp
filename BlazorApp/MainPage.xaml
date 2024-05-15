@@ -12,17 +12,27 @@
         <StackPanel>
 
             <Border Padding="20" Background="LightGreen" Margin="20,0,20,20" HorizontalAlignment="Left">
-                <StackPanel Height="900">
-                    <Button Click="Button_Click"
-            Content="Click me to load C# data into the Blazor components"
-            FontWeight="Bold"
-            FontSize="14"
-            HorizontalAlignment="Left"
-            Margin="0,20,0,0"/>
+                <Grid Width="800" Height="900">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="350"/>
+                        <RowDefinition Height="350"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.RowSpan="2">
+                        <Button Click="Button_Click"
+                Content="Click me to load C# data into the Blazor components"
+                FontWeight="Bold"
+                FontSize="14"
+                HorizontalAlignment="Left"
+                Margin="0,20,0,0"/>
 
-                    <razor:RazorComponent x:Name="RadzenDemo1" Margin="0,20,0,0" Height="200">
-@using Radzen
+                        <razor:RazorComponent x:Name="RadzenDemo1" Margin="0,20,0,0" Height="450">
+                            @using Radzen
 @using Radzen.Blazor
+@using Microsoft.AspNetCore.Components.QuickGrid
 @using OpenSilver.Samples.Showcase
 <h3>RazorComponent Test</h3>
 
@@ -34,37 +44,21 @@
     </Columns>
 </RadzenDataGrid>
 
-                    </razor:RazorComponent>
-
-                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
-
-@using Microsoft.AspNetCore.Components.QuickGrid
-@using OpenSilver.Samples.Showcase
-     
-<h3>Quick Grid Component Test</h3>
-
-<QuickGrid Items="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
+                        <h3>Quick Grid Component Test</h3>
+                        <QuickGrid Items="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
     <PropertyColumn Property="@(p => p.Radius)" Sortable="true" />
     <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
     <PropertyColumn Property="@(p => p.RotationPeriod)" Sortable="true" />
 </QuickGrid>
+                        </razor:RazorComponent>
+                    </StackPanel>
 
-@code {
-
-    <!--public record Person(int PersonId, string Name, DateOnly BirthDate);-->
-
-    <!--[Parameter]-->
-    <!--public IQueryable<Person> People { get; set; }-->
-}
-
-                    </razor:RazorComponent>
-                        
-                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
+                    <razor:RazorComponent Height="300" Grid.Row="0" Grid.Column="1">
 
 @using Syncfusion.Blazor.Grids
 @using OpenSilver.Samples.Showcase
      
-<h3>MudBlazor.Grids Test</h3>
+<h3>Syncfusion.Grid Test</h3>
 
 <SfGrid DataSource="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
     <GridColumns>
@@ -79,8 +73,8 @@
     }
 </style>
                     </razor:RazorComponent>
-                        
-                    <razor:RazorComponent Margin="0,10,0,0" Height="200">
+                    
+                    <razor:RazorComponent Height="300" Grid.Row="1" Grid.Column="1">
 
 @using MudBlazor
 @using OpenSilver.Samples.Showcase
@@ -98,7 +92,7 @@
 <style>
 </style>
                     </razor:RazorComponent>
-                </StackPanel>
+                </Grid>
             </Border>
         </StackPanel>
     </Canvas>
