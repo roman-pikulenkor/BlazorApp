@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Syncfusion.Blazor;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace BlazorApp.Browser
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddSyncfusionBlazor();     // for Syncfusion.Blazor components
 
             // Added:
             OpenSilver.Compatibility.Blazor.Initializer.Initialize(builder);
