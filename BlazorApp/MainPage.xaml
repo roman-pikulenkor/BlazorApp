@@ -7,7 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:razor="clr-namespace:OpenSilver.Compatibility.Blazor;assembly=OpenSilver.Compatibility.Blazor"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
+    <sdk:Page.Resources>
+        <sys:String x:Key="ButtonText">Click me to load C# data into the Blazor components</sys:String>
+    </sdk:Page.Resources>
     <Canvas>
         <StackPanel>
 
@@ -23,7 +27,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.RowSpan="2">
                         <Button Click="Button_Click"
-                Content="Click me to load C# data into the Blazor components"
+                Content="{StaticResource ButtonText}"
                 FontWeight="Bold"
                 FontSize="14"
                 HorizontalAlignment="Left"
@@ -35,7 +39,7 @@
                                 <DataTemplate>
                                     <local:RazorComponent x:Name="RadzenButtonDemo1" Height="30">
 @using Radzen.Blazor
-<RadzenButton Text="{Binding Name, Type=string}" />
+<RadzenButton Text="{Binding Name,Mode=OneWay, Type = string }" />
 
                                     </local:RazorComponent>
                                 </DataTemplate>
@@ -57,7 +61,7 @@
 @using OpenSilver.Samples.Showcase
 <h3>RazorComponent Test</h3>
 
-<RadzenDataGrid Data="{Binding PlanetsArray}" TItem="Planet">
+<RadzenDataGrid Data="{Binding PlanetsArray,Mode=OneWay}" TItem="Planet">
     <Columns>
         <RadzenDataGridColumn TItem="Planet" Property="Radius" Title="Radius"  />
         <RadzenDataGridColumn TItem="Planet" Property="Name" Title="Name" />
@@ -66,7 +70,7 @@
 </RadzenDataGrid>
 
 <h3>Quick Grid Component Test</h3>
-<QuickGrid Items="{Binding PlanetsArray, Type=IQueryable<Planet>}">
+<QuickGrid Items="{Binding PlanetsArray,Type=IQueryable<Planet>}">
     <PropertyColumn Property="@(p => p.Radius)" Sortable="true" />
     <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
     <PropertyColumn Property="@(p => p.RotationPeriod)" Sortable="true" />
@@ -83,7 +87,7 @@
                         
 <h3>Syncfusion.Grid Test</h3>
 
-<SfGrid DataSource="{Binding PlanetsArray, Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
+<SfGrid DataSource="{Binding PlanetsArray,Type=System.Linq.IQueryable<OpenSilver.Samples.Showcase.Planet>}">
     <GridColumns>
         <GridColumn Field=@nameof(Planet.Radius) HeaderText="Radius" TextAlign="TextAlign.Right" Width="120"></GridColumn>
         <GridColumn Field=@nameof(Planet.Name) HeaderText="Name" Width="150"></GridColumn>

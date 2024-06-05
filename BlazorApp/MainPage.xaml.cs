@@ -10,6 +10,7 @@ using System.Collections;
 using OpenSilver.Samples.Showcase;
 using System.Windows.Data;
 using System.ComponentModel;
+using Radzen.Blazor;
 
 namespace BlazorApp
 {
@@ -42,6 +43,9 @@ namespace BlazorApp
             this.InitializeComponent();
 
             this.DataContext = this;
+
+            //Radzen.Blazor.RadzenButton a = new RadzenButton();
+            //a.IconColor
 
             //PlanetsArray = Planet.GetListOfPlanets().AsQueryable();
         }
